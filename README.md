@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="fixtureforge-logo.png" alt="FixtureForge Logo" width="400"/>
+</p>
+
 # FixtureForge
 
 **Agentic Test Data Harness for Python.**  
