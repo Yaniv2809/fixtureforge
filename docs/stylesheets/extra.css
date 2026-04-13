@@ -1,0 +1,60 @@
+:root {
+  --md-primary-fg-color: #1e1b4b;
+  --md-primary-fg-color--light: #3730a3;
+  --md-primary-fg-color--dark: #1e1b4b;
+  --md-accent-fg-color: #4f46e5;
+}
+
+.md-header {
+  background-color: #1e1b4b;
+}
+
+.md-tabs {
+  background-color: #1e1b4b;
+}
+
+/* Hero section on home page */
+.hero {
+  text-align: center;
+  padding: 3rem 1rem 2rem;
+}
+
+.hero img {
+  max-width: 320px;
+  margin-bottom: 1.5rem;
+}
+
+.hero-badges {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+/* Feature grid */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+
+.feature-card {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  background: var(--md-default-bg-color);
+}
+
+.feature-card h3 {
+  margin-top: 0;
+  color: var(--md-accent-fg-color);
+  font-size: 1rem;
+}
+
+.feature-card p {
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  color: var(--md-default-fg-color--light);
+}

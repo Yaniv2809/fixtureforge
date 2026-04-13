@@ -1,0 +1,89 @@
+site_name: FixtureForge
+site_url: https://yaniv2809.github.io/fixtureforge/
+site_description: Agentic Test Data Harness for Python — deterministic in CI, AI-powered in development.
+site_author: Yaniv
+repo_name: Yaniv2809/fixtureforge
+repo_url: https://github.com/Yaniv2809/fixtureforge
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  logo: assets/logo.png
+  favicon: assets/logo.png
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.instant
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.code.annotate
+    - toc.integrate
+
+extra_css:
+  - stylesheets/extra.css
+
+plugins:
+  - search
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.details
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Quick Start: getting-started/quickstart.md
+  - Core Concepts:
+    - Field Routing: concepts/field-routing.md
+    - CI vs Dev Mode: concepts/ci-vs-dev.md
+    - Providers: concepts/providers.md
+  - Features:
+    - pytest Plugin: features/pytest-plugin.md
+    - DataSwarms: features/swarms.md
+    - ForgeMemory: features/memory.md
+    - Permission Gates: features/permissions.md
+    - ForgeDream: features/dream.md
+    - Streaming & Export: features/export.md
+  - API Reference: api-reference.md
+  - Changelog: changelog.md
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Yaniv2809/fixtureforge
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/fixtureforge/
