@@ -1,0 +1,9 @@
+# FixtureForge — Google Gemini provider
+# Install with:  pip install -r requirements-gemini.txt
+#
+# Set env var:   GOOGLE_API_KEY=your_key
+# Or pass:       Forge(provider_name="gemini", api_key="your_key")
+# Default model: gemini-2.0-flash
+
+-r requirements.txt
+google-genai>=1.0.0

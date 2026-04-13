@@ -1,0 +1,22 @@
+# FixtureForge — OpenAI provider (supports OpenAI API + Azure OpenAI + Groq)
+# Install with:  pip install -r requirements-openai.txt
+#
+# OpenAI:
+#   Set env var:   OPENAI_API_KEY=your_key
+#   Or pass:       Forge(provider_name="openai", api_key="your_key")
+#   Default model: gpt-4o-mini
+#
+# Azure OpenAI:
+#   forge = Forge(
+#       provider_name="openai",
+#       api_key="your_azure_key",
+#       model="your-deployment-name",
+#       base_url="https://<resource>.openai.azure.com/",
+#   )
+
+-r requirements.txt
+openai>=1.0.0
+
+# Note: Groq also uses this same package (openai-compatible API)
+# Set env var: GROQ_API_KEY=gsk_...
+# Usage:       Forge(provider_name="groq", model="llama-3.3-70b-versatile")

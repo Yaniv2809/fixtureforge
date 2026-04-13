@@ -1,0 +1,11 @@
+# FixtureForge — All cloud AI providers + SQL support
+# Install with:  pip install -r requirements-all.txt
+#
+# Includes: Gemini + OpenAI + Anthropic + SQLAlchemy
+# Ollama (local) needs no pip package — just run Ollama locally.
+
+-r requirements.txt
+google-genai>=1.0.0
+openai>=1.0.0
+anthropic>=0.18.0
+sqlalchemy>=2.0.0

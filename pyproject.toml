@@ -1,0 +1,85 @@
+[tool.poetry]
+name = "fixtureforge"
+version = "2.1.0"
+description = "Agentic Test Data Harness: memory, multi-agent swarms, permission gates, coverage analysis. Provider-agnostic (Gemini, OpenAI, Anthropic, Ollama)."
+authors = ["Yaniv Metuku"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://fixtureforge.dev"
+repository = "https://github.com/Yaniv2809/fixtureforge"
+keywords = ["testing", "fixtures", "test-data", "qa", "automation", "synthetic-data", "llm", "pytest"]
+
+# ---------------------------------------------------------------------------
+# Core dependencies — always installed, no AI required
+# ---------------------------------------------------------------------------
+[tool.poetry.dependencies]
+python    = "^3.11"
+pydantic  = "^2.5.0"
+faker     = "^22.0.0"
+pyyaml    = "^6.0"
+click     = "^8.1.0"
+rich      = "^13.7.0"
+requests  = "^2.31.0"    # used by OllamaProvider + general HTTP
+
+# SQLAlchemy is optional but common enough to keep as a soft dependency
+sqlalchemy = { version = "^2.0.0", optional = true }
+
+# ---------------------------------------------------------------------------
+# AI provider extras  — install only what you need
+#
+#   pip install fixtureforge[gemini]       → Google Gemini
+#   pip install fixtureforge[openai]       → OpenAI / Azure OpenAI
+#   pip install fixtureforge[anthropic]    → Anthropic Claude
+#   pip install fixtureforge[all]          → all cloud providers
+#
+#   Ollama (local) needs no extra pip package — just run Ollama locally.
+# ---------------------------------------------------------------------------
+google-genai = { version = "^1.0.0",  optional = true }
+openai       = { version = "^1.0.0",  optional = true }
+anthropic    = { version = "^0.18.0", optional = true }
+
+[tool.poetry.extras]
+gemini    = ["google-genai"]
+openai    = ["openai"]
+anthropic = ["anthropic"]
+sql       = ["sqlalchemy"]
+all       = ["google-genai", "openai", "anthropic", "sqlalchemy"]
+
+# ---------------------------------------------------------------------------
+# Development dependencies
+# ---------------------------------------------------------------------------
+[tool.poetry.group.dev.dependencies]
+pytest          = "^7.4.0"
+pytest-asyncio  = "^0.23.0"
+pytest-cov      = "^4.1.0"
+black           = "^23.12.0"
+ruff            = "^0.1.9"
+mypy            = "^1.8.0"
+
+# ---------------------------------------------------------------------------
+# CLI entry point
+# ---------------------------------------------------------------------------
+[tool.poetry.scripts]
+forge = "fixtureforge.cli.commands:cli"
+
+# ---------------------------------------------------------------------------
+# pytest plugin — auto-registered when fixtureforge is installed
+# Makes the ``forge`` fixture available in every test without any conftest.py
+# ---------------------------------------------------------------------------
+[tool.poetry.plugins."pytest11"]
+fixtureforge = "fixtureforge.pytest_plugin"
+
+[build-system]
+requires      = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+# ---------------------------------------------------------------------------
+# Ruff (linting) config
+# ---------------------------------------------------------------------------
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+ignore = ["E501"]

@@ -1,0 +1,13 @@
+# FixtureForge — Anthropic Claude provider
+# Install with:  pip install -r requirements-anthropic.txt
+#
+# Set env var:   ANTHROPIC_API_KEY=your_key
+# Or pass:       Forge(provider_name="anthropic", api_key="your_key")
+#
+# Available models (cheapest → most capable):
+#   claude-haiku-4-5-20251001   ← default (fast, cheap)
+#   claude-sonnet-4-6
+#   claude-opus-4-6
+
+-r requirements.txt
+anthropic>=0.18.0

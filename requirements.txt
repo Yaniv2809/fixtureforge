@@ -1,0 +1,21 @@
+# FixtureForge — Core dependencies (no AI provider)
+# Install with:  pip install -r requirements.txt
+#
+# Then add ONE of the provider extras below:
+#   pip install -r requirements-gemini.txt      (Google Gemini)
+#   pip install -r requirements-openai.txt      (OpenAI / Azure)
+#   pip install -r requirements-anthropic.txt   (Anthropic Claude)
+#   pip install -r requirements-all.txt         (all cloud providers)
+#
+# Local models (Ollama) need NO extra packages — just run Ollama locally.
+
+# --- Core ---
+pydantic>=2.5.0
+faker>=22.0.0
+pyyaml>=6.0
+click>=8.1.0
+rich>=13.7.0
+requests>=2.31.0       # used by OllamaProvider + general HTTP
+
+# --- Optional: SQL export support ---
+# sqlalchemy>=2.0.0
