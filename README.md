@@ -395,3 +395,5 @@ MIT — see [LICENSE](LICENSE).
 - **PyPI**: https://pypi.org/project/fixtureforge/
 - **Repository**: https://github.com/Yaniv2809/fixtureforge
 - **Issues**: https://github.com/Yaniv2809/fixtureforge/issues
+
+💬 [Join the discussion](https://github.com/Yaniv2809/fixtureforge/discussions/1)
