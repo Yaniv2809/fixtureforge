@@ -7,7 +7,7 @@ license = "MIT"
 readme = "README.md"
 homepage = "https://fixtureforge.dev"
 repository = "https://github.com/Yaniv2809/fixtureforge"
-keywords = ["testing", "fixtures", "test-data", "qa", "automation", "synthetic-data", "llm", "pytest"]
+keywords = ["pytest", "fixtures", "test-data", "pydantic", "faker", "factory", "ai", "testing", "mock-data", "qa", "automation", "synthetic-data", "llm", "test-fixtures", "fixture-generator"]
 
 # ---------------------------------------------------------------------------
 # Core dependencies — always installed, no AI required
