@@ -79,6 +79,7 @@ nav:
     - ForgeDream: features/dream.md
     - Streaming & Export: features/export.md
   - API Reference: api-reference.md
+  - FAQ: faq.md
   - Changelog: changelog.md
 
 extra:
