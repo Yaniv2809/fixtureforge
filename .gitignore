@@ -47,6 +47,10 @@ streamed_*.csv
 .forge/
 coverage_gaps.json
 
+# FixtureForge AI features (v2.2.0)
+.fixtureforge_cache/
+.fixtureforge_ai_log.jsonl
+
 # pytest
 .pytest_cache/
 tests/__pycache__/

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fixtureforge"
-version = "2.1.0"
+version = "2.2.0"
 description = "Agentic Test Data Harness: memory, multi-agent swarms, permission gates, coverage analysis. Provider-agnostic (Gemini, OpenAI, Anthropic, Ollama)."
 authors = ["Yaniv Metuku"]
 license = "MIT"

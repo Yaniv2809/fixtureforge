@@ -4,6 +4,32 @@ All notable changes to FixtureForge are documented here.
 
 ---
 
+## [2.2.0] — 2026-04-25
+
+### Added
+- **`assert_semantic_match()`** — semantic validation for AI-generated and natural-language outputs.
+  Default mode: cosine similarity via stdlib TF-IDF (zero cost, zero network).
+  Optional LLM mode (`use_llm=True`): structured judgment via Groq.
+  Returns `SemanticResult(passed, score, reason, method)`.
+  Raises `SemanticAssertionError` (subclass of `AssertionError`) on failure.
+- **`SmartFailureAnalyzer`** — pytest plugin that analyzes failed tests using Groq AI.
+  Hooks into `pytest_runtest_logreport`, triggers only on `FAILED` call-phase reports.
+  Prints a structured diagnosis block (cause + explanation + suggested fix) to the console.
+  Never modifies test results or retries. Opt-in only — must be registered explicitly.
+- **Audit log** — every LLM call is appended to `.fixtureforge_ai_log.jsonl` (JSONL, append-only).
+  Log and cache dir are gitignored automatically.
+- **`_groq_client.py`** — lightweight Groq REST client using only `requests` (already a dependency).
+  Retry logic (2 attempts), 429 backoff, 10s timeout. Raises `LLMClientError` on hard failure.
+
+### Architecture
+- All new features live in `fixtureforge/ai/` — no existing files modified.
+- Zero API calls on import or during normal test runs.
+- Full graceful degradation: if `GROQ_API_KEY` is not set or Groq is unavailable,
+  `assert_semantic_match` falls back to local mode; `SmartFailureAnalyzer` skips silently.
+- Windows terminal encoding handled: ASCII box chars used when stdout is not UTF-8.
+
+---
+
 ## [2.1.0] — 2026-04-13
 
 ### Added
