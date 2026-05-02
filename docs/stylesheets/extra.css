@@ -1,27 +1,170 @@
+/* ============================================================
+   FixtureForge Docs — Custom Theme
+   Primary:  #1e1b4b  (deep indigo)
+   Accent:   #4f46e5  (indigo-600)
+   Light bg: #f5f4ff  (indigo tint, 3%)
+   ============================================================ */
+
+/* ── Brand colours ─────────────────────────────────────────── */
 :root {
-  --md-primary-fg-color: #1e1b4b;
-  --md-primary-fg-color--light: #3730a3;
-  --md-primary-fg-color--dark: #1e1b4b;
-  --md-accent-fg-color: #4f46e5;
+  --forge-deep:    #1e1b4b;
+  --forge-indigo:  #4f46e5;
+  --forge-mid:     #3730a3;
+  --forge-tint:    #f5f4ff;
+  --forge-tint2:   #eeedf9;
+  --forge-border:  #d4d2f0;
+
+  --md-primary-fg-color:        var(--forge-deep);
+  --md-primary-fg-color--light: var(--forge-mid);
+  --md-primary-fg-color--dark:  var(--forge-deep);
+  --md-accent-fg-color:         var(--forge-indigo);
 }
 
+/* ── Header & tabs ──────────────────────────────────────────── */
 .md-header {
-  background-color: #1e1b4b;
+  background-color: var(--forge-deep);
+  box-shadow: 0 2px 8px rgba(30, 27, 75, 0.25);
 }
 
 .md-tabs {
-  background-color: #1e1b4b;
+  background-color: var(--forge-deep);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-/* Hero section on home page */
+.md-tabs__link--active,
+.md-tabs__link:hover {
+  color: #fff;
+  opacity: 1;
+}
+
+/* ── Sidebar ────────────────────────────────────────────────── */
+.md-nav__link--active {
+  color: var(--forge-indigo) !important;
+  font-weight: 600;
+}
+
+.md-nav__link:hover {
+  color: var(--forge-indigo);
+}
+
+/* ── Page content ───────────────────────────────────────────── */
+
+/* H2 headings get a left accent bar */
+.md-content h2 {
+  border-left: 4px solid var(--forge-indigo);
+  padding-left: 0.75rem;
+  margin-left: -0.75rem;
+  color: var(--forge-deep);
+}
+
+/* H3 headings — slightly lighter accent */
+.md-content h3 {
+  color: var(--forge-mid);
+}
+
+/* Inline code chips */
+.md-content code:not(.highlight code) {
+  background-color: var(--forge-tint);
+  color: var(--forge-deep);
+  border: 1px solid var(--forge-border);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-size: 0.88em;
+}
+
+/* Horizontal rules */
+.md-content hr {
+  border-color: var(--forge-border);
+  margin: 2.5rem 0;
+}
+
+/* ── Tables ─────────────────────────────────────────────────── */
+.md-content table {
+  border-collapse: collapse;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(30, 27, 75, 0.08);
+}
+
+.md-content table thead tr {
+  background-color: var(--forge-deep);
+  color: #fff;
+}
+
+.md-content table thead th {
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border: none;
+}
+
+.md-content table tbody tr:nth-child(even) {
+  background-color: var(--forge-tint);
+}
+
+.md-content table tbody tr:hover {
+  background-color: var(--forge-tint2);
+}
+
+.md-content table td {
+  border-color: var(--forge-border);
+  padding: 0.6rem 1rem;
+}
+
+/* ── Buttons ────────────────────────────────────────────────── */
+.md-button--primary {
+  background-color: var(--forge-indigo) !important;
+  border-color: var(--forge-indigo) !important;
+  color: #fff !important;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.15s, transform 0.1s;
+}
+
+.md-button--primary:hover {
+  background-color: var(--forge-deep) !important;
+  border-color: var(--forge-deep) !important;
+  transform: translateY(-1px);
+}
+
+.md-button {
+  border-radius: 6px;
+  border: 2px solid var(--forge-border) !important;
+  color: var(--forge-mid) !important;
+  font-weight: 600;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.md-button:hover {
+  border-color: var(--forge-indigo) !important;
+  color: var(--forge-indigo) !important;
+}
+
+/* ── Hero section ───────────────────────────────────────────── */
 .hero {
   text-align: center;
-  padding: 3rem 1rem 2rem;
+  padding: 4rem 1rem 2.5rem;
+  background: linear-gradient(160deg, var(--forge-tint) 0%, #fff 60%);
+  border-bottom: 2px solid var(--forge-border);
+  border-radius: 0 0 12px 12px;
+  margin-bottom: 1rem;
 }
 
 .hero img {
-  max-width: 320px;
-  margin-bottom: 1.5rem;
+  max-width: 300px;
+  margin-bottom: 1.25rem;
+}
+
+.hero h1 {
+  color: var(--forge-deep) !important;
+  font-size: 2.4rem;
+  font-weight: 800;
+  margin: 0.5rem 0;
+}
+
+.hero p {
+  color: #555;
+  font-size: 1.1rem;
 }
 
 .hero-badges {
@@ -29,10 +172,10 @@
   justify-content: center;
   gap: 0.5rem;
   flex-wrap: wrap;
-  margin-bottom: 2rem;
+  margin-top: 1.25rem;
 }
 
-/* Feature grid */
+/* ── Feature cards ──────────────────────────────────────────── */
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -41,20 +184,62 @@
 }
 
 .feature-card {
-  border: 1px solid var(--md-default-fg-color--lightest);
+  border: 1px solid var(--forge-border);
+  border-top: 3px solid var(--forge-indigo);
   border-radius: 8px;
   padding: 1.25rem 1.5rem;
-  background: var(--md-default-bg-color);
+  background: #fff;
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+
+.feature-card:hover {
+  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.12);
+  transform: translateY(-2px);
 }
 
 .feature-card h3 {
   margin-top: 0;
-  color: var(--md-accent-fg-color);
-  font-size: 1rem;
+  color: var(--forge-deep);
+  font-size: 0.95rem;
+  font-weight: 700;
 }
 
 .feature-card p {
   margin-bottom: 0;
-  font-size: 0.9rem;
-  color: var(--md-default-fg-color--light);
+  font-size: 0.875rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* ── Admonitions (tip/note/warning) ────────────────────────── */
+.md-typeset .admonition,
+.md-typeset details {
+  border-left-color: var(--forge-indigo);
+  border-radius: 0 6px 6px 0;
+}
+
+.md-typeset .admonition-title,
+.md-typeset summary {
+  background-color: var(--forge-tint);
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+.md-footer {
+  background-color: var(--forge-deep);
+}
+
+.md-footer-meta {
+  background-color: #16143a;
+}
+
+/* ── Code blocks ────────────────────────────────────────────── */
+.highlight {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* ── Search highlight ───────────────────────────────────────── */
+.md-search-result mark {
+  background-color: var(--forge-tint2);
+  color: var(--forge-deep);
 }
