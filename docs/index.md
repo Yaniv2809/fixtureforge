@@ -1,19 +1,29 @@
-<div class="hero" markdown>
-  <img src="assets/logo.png" alt="FixtureForge" />
+---
+hide:
+  - toc
+  - navigation
+---
 
-  # FixtureForge
+<div class="forge-hero">
+  <img src="assets/logo.png" alt="FixtureForge" class="forge-hero-logo"/>
+  <p class="forge-hero-tagline">Agentic Test Data Harness for Python</p>
+  <p class="forge-hero-sub">Deterministic in CI &nbsp;·&nbsp; AI-powered in development &nbsp;·&nbsp; pytest-native</p>
+  <div class="forge-hero-badges">
 
-  **Agentic Test Data Harness for Python.**<br>
-  Deterministic in CI. AI-powered in development.
+[![PyPI version](https://img.shields.io/pypi/v/fixtureforge.svg?style=flat-square&color=4f46e5&labelColor=1e1b4b)](https://pypi.org/project/fixtureforge/)
+[![Python 3.11+](https://img.shields.io/badge/python-3.11+-4f46e5?style=flat-square&labelColor=1e1b4b)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-4f46e5?style=flat-square&labelColor=1e1b4b)](https://opensource.org/licenses/MIT)
 
-  <div class="hero-badges" markdown>
-  [![PyPI version](https://img.shields.io/pypi/v/fixtureforge.svg)](https://pypi.org/project/fixtureforge/)
-  [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  </div>
+  <div class="forge-hero-ctas" markdown>
+
+[Get started](getting-started/installation.md){ .md-button .md-button--hero }
+[API Reference](api-reference.md){ .md-button .md-button--hero-outline }
+
   </div>
 </div>
 
----
+<div class="forge-body" markdown>
 
 ## The Problem
 
@@ -26,9 +36,9 @@ user = User(name="Test User", email="test@test.com", bio="Lorem ipsum...")
 # Writing 500 of them by hand? Not happening.
 ```
 
-FixtureForge solves this by generating realistic, context-aware test fixtures —
-using AI when you need quality, Faker when you need speed, and a deterministic
-seed when you need reproducibility in CI.
+FixtureForge generates realistic, context-aware test fixtures — using AI when you
+need quality, Faker when you need speed, and a deterministic seed when you need
+reproducibility in CI.
 
 ---
 
@@ -100,17 +110,6 @@ Auto-detects from environment variables.
 
 ---
 
-## Installation
-
-```bash
-pip install fixtureforge
-```
-
-[Get started](getting-started/installation.md){ .md-button .md-button--primary }
-[API Reference](api-reference.md){ .md-button }
-
----
-
 ## Comparison
 
 |                        | FixtureForge | factory_boy | faker  | hypothesis |
@@ -125,3 +124,5 @@ pip install fixtureforge
 
 FixtureForge is not a replacement for `faker` — it uses `faker` internally.
 It adds the layer between *"I need realistic data"* and *"I need it to feel like production."*
+
+</div>

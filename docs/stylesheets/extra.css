@@ -7,12 +7,12 @@
 
 /* ── Brand colours ─────────────────────────────────────────── */
 :root {
-  --forge-deep:    #1e1b4b;
-  --forge-indigo:  #4f46e5;
-  --forge-mid:     #3730a3;
-  --forge-tint:    #f5f4ff;
-  --forge-tint2:   #eeedf9;
-  --forge-border:  #d4d2f0;
+  --forge-deep:   #1e1b4b;
+  --forge-indigo: #4f46e5;
+  --forge-mid:    #3730a3;
+  --forge-tint:   #f5f4ff;
+  --forge-tint2:  #eeedf9;
+  --forge-border: #d4d2f0;
 
   --md-primary-fg-color:        var(--forge-deep);
   --md-primary-fg-color--light: var(--forge-mid);
@@ -23,12 +23,12 @@
 /* ── Header & tabs ──────────────────────────────────────────── */
 .md-header {
   background-color: var(--forge-deep);
-  box-shadow: 0 2px 8px rgba(30, 27, 75, 0.25);
+  box-shadow: 0 2px 8px rgba(30, 27, 75, 0.3);
 }
 
 .md-tabs {
   background-color: var(--forge-deep);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 
 .md-tabs__link--active,
@@ -37,19 +37,101 @@
   opacity: 1;
 }
 
-/* ── Sidebar ────────────────────────────────────────────────── */
-.md-nav__link--active {
-  color: var(--forge-indigo) !important;
+/* ── Suppress auto-generated page title on home ─────────────── */
+/* MkDocs Material renders the nav label ("Home") as h1 — hide it */
+.md-content__inner > h1:first-child {
+  display: none;
+}
+
+/* ── HERO — full-width dark banner ─────────────────────────── */
+.forge-hero {
+  background: linear-gradient(135deg, var(--forge-deep) 0%, #2d2a7a 60%, var(--forge-mid) 100%);
+  color: #fff;
+  text-align: center;
+  padding: 4rem 2rem 3.5rem;
+  /* bleed to page edges */
+  margin: -1.2rem calc(-1 * var(--md-content-padding, 1.6rem)) 0;
+  border-bottom: 3px solid var(--forge-indigo);
+}
+
+.forge-hero-logo {
+  width: 220px;
+  max-width: 60vw;
+  margin-bottom: 1.5rem;
+  /* invert makes the dark logo visible on dark bg */
+  filter: brightness(0) invert(1);
+}
+
+.forge-hero-tagline {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.forge-hero-sub {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.72);
+  margin: 0 0 1.75rem;
+  letter-spacing: 0.01em;
+}
+
+.forge-hero-badges {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+/* Hero CTA buttons */
+.forge-hero-ctas {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.md-button--hero {
+  background-color: var(--forge-indigo) !important;
+  border: 2px solid var(--forge-indigo) !important;
+  color: #fff !important;
+  border-radius: 6px;
   font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.55em 1.4em;
+  transition: background-color 0.15s, transform 0.1s;
 }
 
-.md-nav__link:hover {
-  color: var(--forge-indigo);
+.md-button--hero:hover {
+  background-color: #6366f1 !important;
+  border-color: #6366f1 !important;
+  transform: translateY(-1px);
 }
 
-/* ── Page content ───────────────────────────────────────────── */
+.md-button--hero-outline {
+  background-color: transparent !important;
+  border: 2px solid rgba(255,255,255,0.45) !important;
+  color: #fff !important;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.55em 1.4em;
+  transition: border-color 0.15s, background-color 0.15s;
+}
 
-/* H2 headings get a left accent bar */
+.md-button--hero-outline:hover {
+  border-color: #fff !important;
+  background-color: rgba(255,255,255,0.08) !important;
+}
+
+/* ── Body content wrapper ───────────────────────────────────── */
+.forge-body {
+  margin-top: 2.5rem;
+}
+
+/* ── Page content headings ──────────────────────────────────── */
 .md-content h2 {
   border-left: 4px solid var(--forge-indigo);
   padding-left: 0.75rem;
@@ -57,12 +139,11 @@
   color: var(--forge-deep);
 }
 
-/* H3 headings — slightly lighter accent */
 .md-content h3 {
   color: var(--forge-mid);
 }
 
-/* Inline code chips */
+/* ── Inline code ────────────────────────────────────────────── */
 .md-content code:not(.highlight code) {
   background-color: var(--forge-tint);
   color: var(--forge-deep);
@@ -72,7 +153,7 @@
   font-size: 0.88em;
 }
 
-/* Horizontal rules */
+/* ── Horizontal rules ───────────────────────────────────────── */
 .md-content hr {
   border-color: var(--forge-border);
   margin: 2.5rem 0;
@@ -84,7 +165,7 @@
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 1px 4px rgba(30, 27, 75, 0.08);
+  box-shadow: 0 1px 4px rgba(30,27,75,0.08);
 }
 
 .md-content table thead tr {
@@ -111,7 +192,7 @@
   padding: 0.6rem 1rem;
 }
 
-/* ── Buttons ────────────────────────────────────────────────── */
+/* ── Buttons (non-hero) ─────────────────────────────────────── */
 .md-button--primary {
   background-color: var(--forge-indigo) !important;
   border-color: var(--forge-indigo) !important;
@@ -140,39 +221,14 @@
   color: var(--forge-indigo) !important;
 }
 
-/* ── Hero section ───────────────────────────────────────────── */
-.hero {
-  text-align: center;
-  padding: 4rem 1rem 2.5rem;
-  background: linear-gradient(160deg, var(--forge-tint) 0%, #fff 60%);
-  border-bottom: 2px solid var(--forge-border);
-  border-radius: 0 0 12px 12px;
-  margin-bottom: 1rem;
+/* ── Sidebar ────────────────────────────────────────────────── */
+.md-nav__link--active {
+  color: var(--forge-indigo) !important;
+  font-weight: 600;
 }
 
-.hero img {
-  max-width: 300px;
-  margin-bottom: 1.25rem;
-}
-
-.hero h1 {
-  color: var(--forge-deep) !important;
-  font-size: 2.4rem;
-  font-weight: 800;
-  margin: 0.5rem 0;
-}
-
-.hero p {
-  color: #555;
-  font-size: 1.1rem;
-}
-
-.hero-badges {
-  display: flex;
-  justify-content: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  margin-top: 1.25rem;
+.md-nav__link:hover {
+  color: var(--forge-indigo);
 }
 
 /* ── Feature cards ──────────────────────────────────────────── */
@@ -193,7 +249,7 @@
 }
 
 .feature-card:hover {
-  box-shadow: 0 4px 16px rgba(79, 70, 229, 0.12);
+  box-shadow: 0 4px 16px rgba(79,70,229,0.12);
   transform: translateY(-2px);
 }
 
@@ -211,7 +267,7 @@
   line-height: 1.6;
 }
 
-/* ── Admonitions (tip/note/warning) ────────────────────────── */
+/* ── Admonitions ────────────────────────────────────────────── */
 .md-typeset .admonition,
 .md-typeset details {
   border-left-color: var(--forge-indigo);
@@ -238,7 +294,7 @@
   overflow: hidden;
 }
 
-/* ── Search highlight ───────────────────────────────────────── */
+/* ── Search ─────────────────────────────────────────────────── */
 .md-search-result mark {
   background-color: var(--forge-tint2);
   color: var(--forge-deep);
