@@ -63,3 +63,6 @@ Thumbs.db
 my_models.py
 rename_to_v2.bat
 setup_project.py
+
+# Claude Code session data
+.claude/

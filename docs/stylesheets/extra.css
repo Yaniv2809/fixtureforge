@@ -54,12 +54,38 @@
   border-bottom: 3px solid var(--forge-indigo);
 }
 
+.forge-hero-logo-wrap {
+  margin-bottom: 1.75rem;
+}
+
 .forge-hero-logo {
-  width: 220px;
-  max-width: 60vw;
-  margin-bottom: 1.5rem;
-  /* invert makes the dark logo visible on dark bg */
-  filter: brightness(0) invert(1);
+  width: 180px;
+  max-width: 50vw;
+  background: #fff;
+  border-radius: 20px;
+  padding: 0.9rem 1.6rem 0.7rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+}
+
+/* Meta row: v2.2.0 · MIT · Python 3.11+ · PyPI */
+.forge-hero-meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+}
+
+.forge-hero-meta a {
+  color: rgba(255,255,255,0.75);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.forge-hero-meta a:hover {
+  color: #fff;
 }
 
 .forge-hero-tagline {

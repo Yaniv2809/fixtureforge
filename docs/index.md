@@ -5,21 +5,23 @@ hide:
 ---
 
 <div class="forge-hero">
-  <img src="assets/logo.png" alt="FixtureForge" class="forge-hero-logo"/>
+  <div class="forge-hero-logo-wrap">
+    <img src="assets/logo.png" alt="FixtureForge" class="forge-hero-logo"/>
+  </div>
   <p class="forge-hero-tagline">Agentic Test Data Harness for Python</p>
   <p class="forge-hero-sub">Deterministic in CI &nbsp;·&nbsp; AI-powered in development &nbsp;·&nbsp; pytest-native</p>
-  <div class="forge-hero-badges">
-
-[![PyPI version](https://img.shields.io/pypi/v/fixtureforge.svg?style=flat-square&color=4f46e5&labelColor=1e1b4b)](https://pypi.org/project/fixtureforge/)
-[![Python 3.11+](https://img.shields.io/badge/python-3.11+-4f46e5?style=flat-square&labelColor=1e1b4b)](https://www.python.org/downloads/)
-[![License: MIT](https://img.shields.io/badge/license-MIT-4f46e5?style=flat-square&labelColor=1e1b4b)](https://opensource.org/licenses/MIT)
-
+  <div class="forge-hero-ctas">
+    <a href="getting-started/installation/" class="md-button md-button--hero">Get started</a>
+    <a href="api-reference/" class="md-button md-button--hero-outline">API Reference</a>
   </div>
-  <div class="forge-hero-ctas" markdown>
-
-[Get started](getting-started/installation.md){ .md-button .md-button--hero }
-[API Reference](api-reference.md){ .md-button .md-button--hero-outline }
-
+  <div class="forge-hero-meta">
+    <span>v2.2.0</span>
+    <span>·</span>
+    <span>MIT License</span>
+    <span>·</span>
+    <span>Python 3.11+</span>
+    <span>·</span>
+    <a href="https://pypi.org/project/fixtureforge/" target="_blank">PyPI</a>
   </div>
 </div>
 
