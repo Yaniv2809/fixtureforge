@@ -1,0 +1,327 @@
+/* ============================================================
+   FixtureForge Docs — Custom Theme
+   Primary:  #1e1b4b  (deep indigo)
+   Accent:   #4f46e5  (indigo-600)
+   Light bg: #f5f4ff  (indigo tint, 3%)
+   ============================================================ */
+
+/* ── Brand colours ─────────────────────────────────────────── */
+:root {
+  --forge-deep:   #1e1b4b;
+  --forge-indigo: #4f46e5;
+  --forge-mid:    #3730a3;
+  --forge-tint:   #f5f4ff;
+  --forge-tint2:  #eeedf9;
+  --forge-border: #d4d2f0;
+
+  --md-primary-fg-color:        var(--forge-deep);
+  --md-primary-fg-color--light: var(--forge-mid);
+  --md-primary-fg-color--dark:  var(--forge-deep);
+  --md-accent-fg-color:         var(--forge-indigo);
+}
+
+/* ── Header & tabs ──────────────────────────────────────────── */
+.md-header {
+  background-color: var(--forge-deep);
+  box-shadow: 0 2px 8px rgba(30, 27, 75, 0.3);
+}
+
+.md-tabs {
+  background-color: var(--forge-deep);
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.md-tabs__link--active,
+.md-tabs__link:hover {
+  color: #fff;
+  opacity: 1;
+}
+
+/* ── Suppress auto-generated page title on home ─────────────── */
+/* MkDocs Material renders the nav label ("Home") as h1 — hide it */
+.md-content__inner > h1:first-child {
+  display: none;
+}
+
+/* ── HERO — full-width dark banner ─────────────────────────── */
+.forge-hero {
+  background: linear-gradient(135deg, var(--forge-deep) 0%, #2d2a7a 60%, var(--forge-mid) 100%);
+  color: #fff;
+  text-align: center;
+  padding: 4rem 2rem 3.5rem;
+  /* bleed to page edges */
+  margin: -1.2rem calc(-1 * var(--md-content-padding, 1.6rem)) 0;
+  border-bottom: 3px solid var(--forge-indigo);
+}
+
+.forge-hero-logo-wrap {
+  margin-bottom: 1.75rem;
+}
+
+.forge-hero-logo {
+  width: 180px;
+  max-width: 50vw;
+  background: #fff;
+  border-radius: 20px;
+  padding: 0.9rem 1.6rem 0.7rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+}
+
+/* Meta row: v2.2.0 · MIT · Python 3.11+ · PyPI */
+.forge-hero-meta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.55);
+}
+
+.forge-hero-meta a {
+  color: rgba(255,255,255,0.75);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.forge-hero-meta a:hover {
+  color: #fff;
+}
+
+.forge-hero-tagline {
+  font-size: 1.65rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.forge-hero-sub {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.72);
+  margin: 0 0 1.75rem;
+  letter-spacing: 0.01em;
+}
+
+.forge-hero-badges {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+/* Hero CTA buttons */
+.forge-hero-ctas {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.md-button--hero {
+  background-color: var(--forge-indigo) !important;
+  border: 2px solid var(--forge-indigo) !important;
+  color: #fff !important;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.55em 1.4em;
+  transition: background-color 0.15s, transform 0.1s;
+}
+
+.md-button--hero:hover {
+  background-color: #6366f1 !important;
+  border-color: #6366f1 !important;
+  transform: translateY(-1px);
+}
+
+.md-button--hero-outline {
+  background-color: transparent !important;
+  border: 2px solid rgba(255,255,255,0.45) !important;
+  color: #fff !important;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.55em 1.4em;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+
+.md-button--hero-outline:hover {
+  border-color: #fff !important;
+  background-color: rgba(255,255,255,0.08) !important;
+}
+
+/* ── Body content wrapper ───────────────────────────────────── */
+.forge-body {
+  margin-top: 2.5rem;
+}
+
+/* ── Page content headings ──────────────────────────────────── */
+.md-content h2 {
+  border-left: 4px solid var(--forge-indigo);
+  padding-left: 0.75rem;
+  margin-left: -0.75rem;
+  color: var(--forge-deep);
+}
+
+.md-content h3 {
+  color: var(--forge-mid);
+}
+
+/* ── Inline code ────────────────────────────────────────────── */
+.md-content code:not(.highlight code) {
+  background-color: var(--forge-tint);
+  color: var(--forge-deep);
+  border: 1px solid var(--forge-border);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-size: 0.88em;
+}
+
+/* ── Horizontal rules ───────────────────────────────────────── */
+.md-content hr {
+  border-color: var(--forge-border);
+  margin: 2.5rem 0;
+}
+
+/* ── Tables ─────────────────────────────────────────────────── */
+.md-content table {
+  border-collapse: collapse;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(30,27,75,0.08);
+}
+
+.md-content table thead tr {
+  background-color: var(--forge-deep);
+  color: #fff;
+}
+
+.md-content table thead th {
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border: none;
+}
+
+.md-content table tbody tr:nth-child(even) {
+  background-color: var(--forge-tint);
+}
+
+.md-content table tbody tr:hover {
+  background-color: var(--forge-tint2);
+}
+
+.md-content table td {
+  border-color: var(--forge-border);
+  padding: 0.6rem 1rem;
+}
+
+/* ── Buttons (non-hero) ─────────────────────────────────────── */
+.md-button--primary {
+  background-color: var(--forge-indigo) !important;
+  border-color: var(--forge-indigo) !important;
+  color: #fff !important;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: background-color 0.15s, transform 0.1s;
+}
+
+.md-button--primary:hover {
+  background-color: var(--forge-deep) !important;
+  border-color: var(--forge-deep) !important;
+  transform: translateY(-1px);
+}
+
+.md-button {
+  border-radius: 6px;
+  border: 2px solid var(--forge-border) !important;
+  color: var(--forge-mid) !important;
+  font-weight: 600;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.md-button:hover {
+  border-color: var(--forge-indigo) !important;
+  color: var(--forge-indigo) !important;
+}
+
+/* ── Sidebar ────────────────────────────────────────────────── */
+.md-nav__link--active {
+  color: var(--forge-indigo) !important;
+  font-weight: 600;
+}
+
+.md-nav__link:hover {
+  color: var(--forge-indigo);
+}
+
+/* ── Feature cards ──────────────────────────────────────────── */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+
+.feature-card {
+  border: 1px solid var(--forge-border);
+  border-top: 3px solid var(--forge-indigo);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  background: #fff;
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+
+.feature-card:hover {
+  box-shadow: 0 4px 16px rgba(79,70,229,0.12);
+  transform: translateY(-2px);
+}
+
+.feature-card h3 {
+  margin-top: 0;
+  color: var(--forge-deep);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.feature-card p {
+  margin-bottom: 0;
+  font-size: 0.875rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* ── Admonitions ────────────────────────────────────────────── */
+.md-typeset .admonition,
+.md-typeset details {
+  border-left-color: var(--forge-indigo);
+  border-radius: 0 6px 6px 0;
+}
+
+.md-typeset .admonition-title,
+.md-typeset summary {
+  background-color: var(--forge-tint);
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+.md-footer {
+  background-color: var(--forge-deep);
+}
+
+.md-footer-meta {
+  background-color: #16143a;
+}
+
+/* ── Code blocks ────────────────────────────────────────────── */
+.highlight {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* ── Search ─────────────────────────────────────────────────── */
+.md-search-result mark {
+  background-color: var(--forge-tint2);
+  color: var(--forge-deep);
+}
