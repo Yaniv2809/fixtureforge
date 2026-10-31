@@ -2,9 +2,11 @@
 FixtureForge pytest plugin — integration test conftest.
 Demonstrates the exact API a real project would use.
 """
-# When running from source (not installed), register plugin explicitly.
-# In installed projects this is handled automatically via the pytest11 entry point.
-pytest_plugins = ["fixtureforge.pytest_plugin"]
+# Only register the plugin explicitly when it hasn't already been loaded by the
+# pytest11 entry point (i.e. when running from source without pip install -e).
+import sys
+if "fixtureforge.pytest_plugin" not in sys.modules:
+    pytest_plugins = ["fixtureforge.pytest_plugin"]
 
 from pydantic import BaseModel
 

@@ -223,9 +223,9 @@ for user in forge.create_stream(User, count=1_000_000, filename="users.json"):
 from fixtureforge.core.exporter import DataExporter
 
 users = forge.create_batch(User, count=100)
-DataExporter.to_json(users, "users.json")
-DataExporter.to_csv(users,  "users.csv")
-DataExporter.to_sql(users,  "users.sql", table_name="users")
+DataExporter.export(users, "users.json")   # format inferred from extension
+DataExporter.export(users, "users.csv")
+DataExporter.export(users, "users.sql")
 ```
 
 ---
@@ -332,6 +332,21 @@ with forge.isolate_tenant("tenant-acme"):
 - **Repository**: https://github.com/Yaniv2809/fixtureforge
 - **Issues**: https://github.com/Yaniv2809/fixtureforge/issues
 - **Discussion**: https://github.com/Yaniv2809/fixtureforge/discussions/1
+
+---
+
+## Use with AI coding agents
+
+FixtureForge ships an official agent skill so AI coding assistants (Claude Code,
+Cursor, GitHub Copilot, Devin, etc.) know exactly how to use the library.
+
+The skill lives at [`skills/fixtureforge/SKILL.md`](skills/fixtureforge/SKILL.md)
+and covers: when to use FixtureForge, install & setup, core API, CI determinism,
+FK wiring, pytest plugin, common mistakes, and provider names.
+
+Agents working in a repo that uses FixtureForge will automatically pick up the
+skill and avoid the most common mistakes (hardcoded generators, manual FK wiring,
+`use_ai=True` in CI).
 
 ---
 

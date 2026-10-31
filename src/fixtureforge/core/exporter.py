@@ -31,13 +31,13 @@ class DataExporter:
             for item in data
         ]
         
-        # המרה של תאריכים למחרוזות כדי ש-JSON לא ייכשל
+        # convert dates to strings for JSON serialization
         json_ready = json.loads(json.dumps(json_ready, default=str))
 
         with open(path, "w", encoding="utf-8") as f:
             json.dump(json_ready, f, indent=2)
         
-        print(f"✅ Successfully exported {len(data)} items to {path}")
+        print(f"Exported {len(data)} items to {path}")
 
     @staticmethod
     def _to_csv(data: List[Any], path: Path):
@@ -58,7 +58,7 @@ class DataExporter:
             writer.writeheader()
             writer.writerows(rows)
             
-        print(f"✅ Successfully exported {len(data)} items to {path}")
+        print(f"Exported {len(data)} items to {path}")
 
     @staticmethod
     def _to_sql(data: List[Any], path: Path):
@@ -73,7 +73,7 @@ class DataExporter:
             f.write(f"-- Target Table: {table_name}\n\n")
 
             for item in data:
-                # המרה למילון
+                # convert to dict
                 record = item.model_dump() if isinstance(item, BaseModel) else item.__dict__
                 
                 columns = ", ".join(record.keys())
@@ -93,4 +93,4 @@ class DataExporter:
                 sql_stmt = f"INSERT INTO {table_name} ({columns}) VALUES ({vals_str});\n"
                 f.write(sql_stmt)
 
-        print(f"✅ Successfully exported {len(data)} SQL statements to {path}")
+        print(f"Exported {len(data)} SQL statements to {path}")

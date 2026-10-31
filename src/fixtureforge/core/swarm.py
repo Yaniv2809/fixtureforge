@@ -23,6 +23,7 @@ Usage:
 from __future__ import annotations
 
 import concurrent.futures
+import contextvars
 from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Type
 
 from pydantic import BaseModel
@@ -93,16 +94,16 @@ class DataSwarm:
         # ── Phase 1: warm the cache with the first model ────────────────
         first_model, first_count, first_ctx = tasks[0]
         print(
-            f"\n🐝 Swarm start — {len(models)} models, "
+            f"\n[Swarm] start: {len(models)} models, "
             f"{sum(counts)} total records"
         )
-        print(f"   [0/{len(models)}] Warming cache: {first_count} × {first_model.__name__}...")
+        print(f"   [0/{len(models)}] Warming cache: {first_count} x {first_model.__name__}...")
         results[first_model.__name__] = self._forge.create_batch(
             first_model, count=first_count, context=first_ctx
         )
 
         if len(tasks) == 1:
-            print(f"✅ Swarm complete — {len(results[first_model.__name__])} records")
+            print(f"[Swarm] complete: {len(results[first_model.__name__])} records")
             return results
 
         # ── Phase 2: remaining models in parallel (cache is now warm) ───
@@ -124,8 +125,12 @@ class DataSwarm:
         with concurrent.futures.ThreadPoolExecutor(
             max_workers=min(self._max_workers, len(remaining))
         ) as pool:
+            # Each thread gets its own copy of the current context so that
+            # ContextVar values (e.g. _CURRENT_TENANT for Enterprise tenant
+            # isolation) are propagated without sharing a single Context object
+            # across threads (Context.run() is not re-entrant).
             futures = {
-                pool.submit(_worker, i + 1, task): task
+                pool.submit(contextvars.copy_context().run, _worker, i + 1, task): task
                 for i, task in enumerate(remaining)
             }
             for future in concurrent.futures.as_completed(futures):
@@ -134,6 +139,6 @@ class DataSwarm:
 
         total = sum(len(v) for v in results.values())
         print(
-            f"✅ Swarm complete — {total} records across {len(models)} models\n"
+            f"[Swarm] complete: {total} records across {len(models)} models\n"
         )
         return results
