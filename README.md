@@ -315,7 +315,7 @@ with forge.isolate_tenant("tenant-acme"):
 | Core (`Forge`, `create_batch`) | ✅ Stable |
 | DataSwarms | ✅ Stable |
 | ForgeMemory | ✅ Stable |
-| pytest plugin | ✅ v2.2.0 |
+| pytest plugin | ✅ v2.3.0 |
 | Anthropic / OpenAI / Gemini / Groq / Ollama | ✅ |
 | Literal / Enum / date / datetime / UUID / Decimal | ✅ v2.2.0 |
 | MCP Server (`fixtureforge-mcp`) | ✅ v2.3.0 |
