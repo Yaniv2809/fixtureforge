@@ -317,6 +317,8 @@ with forge.isolate_tenant("tenant-acme"):
 | ForgeMemory | ✅ Stable |
 | pytest plugin | ✅ v2.2.0 |
 | Anthropic / OpenAI / Gemini / Groq / Ollama | ✅ |
+| Literal / Enum / date / datetime / UUID / Decimal | ✅ v2.2.0 |
+| MCP Server (`fixtureforge-mcp`) | ✅ v2.3.0 |
 | `assert_semantic_match` | ✅ v2.2.0 |
 | `SmartFailureAnalyzer` | ✅ v2.2.0 |
 | Enterprise Edition | ✅ (access by request) |
@@ -332,6 +334,47 @@ with forge.isolate_tenant("tenant-acme"):
 - **Repository**: https://github.com/Yaniv2809/fixtureforge
 - **Issues**: https://github.com/Yaniv2809/fixtureforge/issues
 - **Discussion**: https://github.com/Yaniv2809/fixtureforge/discussions/1
+
+---
+
+## MCP Server — use FixtureForge inside Claude Desktop / any MCP client
+
+FixtureForge ships a built-in MCP server so Claude Desktop and other MCP-capable
+AI tools can generate test data directly in a conversation.
+
+### Install
+
+```bash
+pip install "fixtureforge[mcp]"
+```
+
+### Add to Claude Desktop (`claude_desktop_config.json`)
+
+```json
+{
+  "mcpServers": {
+    "fixtureforge": {
+      "command": "fixtureforge-mcp"
+    }
+  }
+}
+```
+
+Restart Claude Desktop — FixtureForge appears in the tool list automatically.
+
+### Available tools
+
+| Tool | What it does |
+|------|-------------|
+| `generate` | Generate N records for a model described by `{field: type}` |
+| `swarm` | Generate multiple models in parallel with shared AI cache |
+| `add_rule` | Persist a domain rule injected into every AI prompt |
+| `export` | Generate records and save to `.json`, `.csv`, or `.sql` |
+
+### Example prompt to Claude
+
+> "Use fixtureforge to generate 20 User records with id, name, email and bio fields,
+> then export them to users.json"
 
 ---
 

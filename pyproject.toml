@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fixtureforge"
-version = "2.2.0"
+version = "2.3.0"
 description = "Agentic Test Data Harness: memory, multi-agent swarms, permission gates, coverage analysis. Provider-agnostic (Gemini, OpenAI, Anthropic, Ollama)."
 authors = ["Yaniv Metuku"]
 license = "MIT"
@@ -37,13 +37,15 @@ sqlalchemy = { version = "^2.0.0", optional = true }
 google-genai = { version = "^1.0.0",  optional = true }
 openai       = { version = "^1.0.0",  optional = true }
 anthropic    = { version = "^0.18.0", optional = true }
+mcp          = { version = "^2.0.0",  optional = true }
 
 [tool.poetry.extras]
 gemini    = ["google-genai"]
 openai    = ["openai"]
 anthropic = ["anthropic"]
 sql       = ["sqlalchemy"]
-all       = ["google-genai", "openai", "anthropic", "sqlalchemy"]
+mcp       = ["mcp"]
+all       = ["google-genai", "openai", "anthropic", "sqlalchemy", "mcp"]
 
 # ---------------------------------------------------------------------------
 # Development dependencies
@@ -60,7 +62,8 @@ mypy            = "^1.8.0"
 # CLI entry point
 # ---------------------------------------------------------------------------
 [tool.poetry.scripts]
-forge = "fixtureforge.cli.commands:cli"
+forge          = "fixtureforge.cli.commands:cli"
+fixtureforge-mcp = "fixtureforge.mcp_server:main"
 
 # ---------------------------------------------------------------------------
 # pytest plugin — auto-registered when fixtureforge is installed
