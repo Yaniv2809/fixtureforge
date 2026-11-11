@@ -96,8 +96,9 @@ class IntelligentRouter:
         if any(kw in name_parts for kw in self._STANDARD_KEYWORDS):
             return FieldTier.STANDARD
 
-        # 5. Semantic: explicit keyword match on string fields
-        if "str" in type_str:
+        # 5. Semantic: explicit keyword match on plain string fields only.
+        #    Use type_str == "str" to avoid matching List[str], Optional[str], etc.
+        if type_str == "str":
             if any(kw in name_parts for kw in self._SEMANTIC_KEYWORDS):
                 return FieldTier.SEMANTIC
 

@@ -4,9 +4,12 @@ BasicGenerator — generate a single model instance using Faker + AI routing.
 For bulk generation (N records) use SmartBatchEngine which makes far fewer
 API calls by batching all semantic fields across all records.
 """
+import enum
 import random
 import uuid
-from typing import Any, Dict, List, Optional, Type
+from datetime import date, datetime
+from decimal import Decimal
+from typing import Any, Dict, List, Optional, Type, Union, get_args, get_origin
 
 from faker import Faker
 
@@ -46,6 +49,10 @@ class BasicGenerator:
             self._rng = random.Random(seed)
         else:
             self._rng = random
+
+        # Enterprise Pillar 3: cross-tenant FK check.
+        # Set to True only by ForgeEnterprise — Community Edition never touches this.
+        self._enterprise_tenancy_enabled: bool = False
 
         if ai_engine is not None:
             self.ai_engine = ai_engine
@@ -118,7 +125,13 @@ class BasicGenerator:
             target_model = name[: -len("_id")]
             records = self.registry.get(target_model, [])
             if records:
-                return getattr(self._rng.choice(records), "id", None)
+                chosen = self._rng.choice(records)
+
+                # Enterprise Pillar 3: cross-tenant FK violation check
+                if self._enterprise_tenancy_enabled:
+                    self._check_cross_tenant(chosen, field.name)
+
+                return getattr(chosen, "id", None)
 
         # Integer PK / sequential ID
         if "int" in field.type_name.lower():
@@ -137,7 +150,7 @@ class BasicGenerator:
 
     def _generate_semantic_content(self, field: FieldInfo, context: str = None) -> str:
         if not self.ai_engine or not self.ai_engine.is_available:
-            return f"[AI Placeholder for {field.name}]"
+            return self.faker.paragraph(nb_sentences=2)
 
         prompt = f"Generate a realistic value for a database field named '{field.name}'."
         if context:
@@ -153,9 +166,65 @@ class BasicGenerator:
     # ------------------------------------------------------------------
 
     def _generate_standard(self, field: FieldInfo) -> Any:
+        # ── Type-exact dispatch (runs before name heuristics) ────────────
+        # Uses the actual Python type, not a string. This handles Literal,
+        # Enum, date, datetime, UUID, Decimal, and Optional correctly.
+        actual_type = field.field_type
+        origin = get_origin(actual_type)
+        args = get_args(actual_type)
+
+        # Literal['a', 'b', ...] → pick one allowed value
+        if origin is type(None):
+            return None
+        try:
+            from typing import Literal as _Literal  # noqa: PLC0415
+            if origin is _Literal:
+                return self._rng.choice(list(args))
+        except ImportError:
+            pass
+
+        # Optional[X] / Union[X, None] → unwrap to inner type
+        if origin is Union:
+            non_none = [a for a in args if a is not type(None)]
+            if non_none:
+                inner = FieldInfo(
+                    name=field.name,
+                    field_type=non_none[0],
+                    required=field.required,
+                    default=field.default,
+                    constraints=field.constraints,
+                    metadata=field.metadata,
+                )
+                return self._generate_standard(inner)
+
+        # Enum subclass → pick a member
+        if isinstance(actual_type, type) and issubclass(actual_type, enum.Enum):
+            return self._rng.choice(list(actual_type))
+
+        # datetime must come BEFORE date (datetime is a subclass of date)
+        if actual_type is datetime:
+            return self.faker.date_time_this_decade()
+        if actual_type is date:
+            return self.faker.date_this_decade()
+
+        # UUID
+        if actual_type is uuid.UUID:
+            return uuid.uuid4()
+
+        # Decimal
+        if actual_type is Decimal:
+            return Decimal(str(round(self._rng.uniform(0, 10000), 2)))
+
+        # ── Name / type-string heuristics ────────────────────────────────
         name = field.name.lower()
         name_parts = set(name.split("_"))
         type_name = field.type_name.lower()
+
+        # Respect max_length before any name heuristic so e.g. a "name" field
+        # with max_length=10 never returns faker.name() which may be longer.
+        max_len = field.constraints.get("max_length")
+        if max_len is not None and type_name == "str":
+            return self.faker.word()[:max_len]
 
         # String heuristics — order matters (more specific first).
         # Use word-boundary checks (name_parts) for short common keywords
@@ -213,7 +282,46 @@ class BasicGenerator:
         if "dict" in type_name:
             return {}
 
+        # str with max_length constraint — truncate to fit
+        if "str" in type_name:
+            max_len = field.constraints.get("max_length")
+            if max_len is not None:
+                return self.faker.word()[:max_len]
+
         return self.faker.word()
+
+    def _check_cross_tenant(self, record: Any, field_name: str) -> None:
+        """
+        Verify that a FK target record belongs to the same tenant as the current context.
+        Raises CrossTenantViolationError on mismatch.
+
+        Uses a lazy import to avoid core → enterprise dependency at module load time.
+        This method is only called when _enterprise_tenancy_enabled=True, which is
+        set exclusively by ForgeEnterprise — so the import always succeeds in that path.
+        """
+        try:
+            from ..enterprise.tenancy import (  # noqa: PLC0415
+                CrossTenantViolationError,
+                _CURRENT_TENANT,
+            )
+        except ImportError:
+            return  # enterprise module not installed — silently skip
+
+        current_tenant = _CURRENT_TENANT.get()
+        if current_tenant is None:
+            return  # not inside an isolate_tenant block
+
+        forge_meta = getattr(record, "forge_metadata", None)
+        if forge_meta is None:
+            return  # record has no provenance — cannot verify, allow
+
+        ref_tenant = getattr(forge_meta, "tenant_id", None)
+        if ref_tenant is not None and ref_tenant != current_tenant:
+            raise CrossTenantViolationError(
+                source_tenant=current_tenant,
+                target_tenant=ref_tenant,
+                field_name=field_name,
+            )
 
     def _generate_int(self, field: FieldInfo) -> int:
         c = field.constraints

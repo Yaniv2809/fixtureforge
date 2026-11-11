@@ -59,7 +59,7 @@ from .security.permissions import (
     ForgeCoordinator,
 )
 
-__version__ = "2.1.0"
+__version__ = "2.2.0"
 
 T = TypeVar("T", bound=BaseModel)
 
@@ -206,8 +206,6 @@ class Forge:
         domain_rules = self.memory.get_rules_for_prompt(model_name=model.__name__)
 
         for i in range(count):
-            if count > 1 and not self._verbose:
-                print(f"   ...generating {i + 1}/{count}...")
             if self._verbose and count > 1:
                 print(f"\n  --- record {i + 1}/{count} ---")
             item = self.generator.generate(model, context=context, **overrides)
